@@ -6,18 +6,25 @@ services:
     volumes:
       - ~/mongors/data:/data/db
       - ./rs-init.sh:/scripts/rs-init.sh
-    hostname: mongodb
-    restart: always
-    container_name: mongodb
     ports:
       - 27017:27017
+    entrypoint:
+      [
+        "/usr/bin/mongod",
+        "--bind_ip_all",
+        "--replSet",
+        "rs0"
+      ]
+    container_name: mongodb
+    hostname: mongodb
+    restart: always
     networks:
       - mongo-network
+    # command: [ "--replSet", "rs0", "--bind_ip_all" ]
     # healthcheck:
     #   test: test $$(echo "rs.initiate().ok || rs.status().ok" | mongo -u mongo -p mongo --quiet) -eq 1
     #   interval: 10s
     #   start_period: 30s
-    command: [ "--replSet", "rs0", "--bind_ip_all" ]
 
 networks:
   mongo-network:
