@@ -1,7 +1,7 @@
 #!/bin/bash
 
 /usr/bin/mongosh <<EOF
-var config = {
+var rs_config = {
     "_id": "rs0",
     "version": 1,
     "members": [
@@ -22,6 +22,6 @@ var config = {
         }
     ]
 };
-rs.initiate(config, { force: true });
+rs.initiate(rs_config);
 rs.status();
 EOF

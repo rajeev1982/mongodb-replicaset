@@ -7,14 +7,8 @@ services:
     volumes:
       - ~/mongors/data1:/data/db
       - ./rs-init.sh:/scripts/rs-init.sh
-    networks:
-      - mongors-network
     ports:
       - 27017:27017
-    links:
-      - mongo2
-      - mongo3
-    restart: always
     entrypoint:
       [
         "/usr/bin/mongod",
@@ -22,17 +16,20 @@ services:
         "--replSet",
         "rs0"
       ]
+    links:
+      - mongo2
+      - mongo3
+    restart: always
+    networks:
+      - mongors-network
 
   mongo2:
     container_name: mongo2
     image: mongo:6.0.4
     volumes:
       - ~/mongors/data2:/data/db
-    networks:
-      - mongors-network
     ports:
       - 27018:27017
-    restart: always
     entrypoint:
       [
         "/usr/bin/mongod",
@@ -40,17 +37,17 @@ services:
         "--replSet",
         "rs0"
       ]
+    restart: always
+    networks:
+      - mongors-network
 
   mongo3:
     container_name: mongo3
     image: mongo:6.0.4
     volumes:
       - ~/mongors/data3:/data/db
-    networks:
-      - mongors-network
     ports:
       - 27019:27017
-    restart: always
     entrypoint:
       [
         "/usr/bin/mongod",
@@ -58,6 +55,9 @@ services:
         "--replSet",
         "rs0"
       ]
+    restart: always
+    networks:
+      - mongors-network
 
 networks:
   mongors-network:
