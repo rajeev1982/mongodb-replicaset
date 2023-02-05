@@ -2,7 +2,7 @@
 
 /usr/bin/mongosh <<EOF
 var config = {
-    "_id": "dbrs",
+    "_id": "rs0",
     "version": 1,
     "members": [
         {

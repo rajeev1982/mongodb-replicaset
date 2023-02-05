@@ -20,7 +20,7 @@ services:
         "/usr/bin/mongod",
         "--bind_ip_all",
         "--replSet",
-        "dbrs"
+        "rs0"
       ]
 
   mongo2:
@@ -38,7 +38,7 @@ services:
         "/usr/bin/mongod",
         "--bind_ip_all",
         "--replSet",
-        "dbrs"
+        "rs0"
       ]
 
   mongo3:
@@ -56,7 +56,7 @@ services:
         "/usr/bin/mongod",
         "--bind_ip_all",
         "--replSet",
-        "dbrs"
+        "rs0"
       ]
 
 networks:
